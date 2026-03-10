@@ -23,16 +23,16 @@ get_header(); ?>
     <div class="container">
 
         <!-- Tab Nav -->
-        <div class="program-tabs">
-            <button class="tab-btn active" data-tab="infant">👶 Infants</button>
-            <button class="tab-btn" data-tab="pretoddler">🧸 Pre-Toddlers</button>
-            <button class="tab-btn" data-tab="toddlers">🎨 Toddlers</button>
-            <button class="tab-btn" data-tab="prek">✏️ Pre-Kindergarten</button>
-            <button class="tab-btn" data-tab="kinder">🏫 Private Kindergarten</button>
+        <div class="program-tabs" role="tablist">
+            <button class="tab-btn active" id="btn-infant" data-tab="infant" role="tab" aria-selected="true" tabindex="0" aria-controls="tab-infant">👶 Infants</button>
+            <button class="tab-btn" id="btn-pretoddler" data-tab="pretoddler" role="tab" aria-selected="false" tabindex="-1" aria-controls="tab-pretoddler">🧸 Pre-Toddlers</button>
+            <button class="tab-btn" id="btn-toddlers" data-tab="toddlers" role="tab" aria-selected="false" tabindex="-1" aria-controls="tab-toddlers">🎨 Toddlers</button>
+            <button class="tab-btn" id="btn-prek" data-tab="prek" role="tab" aria-selected="false" tabindex="-1" aria-controls="tab-prek">✏️ Pre-Kindergarten</button>
+            <button class="tab-btn" id="btn-kinder" data-tab="kinder" role="tab" aria-selected="false" tabindex="-1" aria-controls="tab-kinder">🏫 Private Kindergarten</button>
         </div>
 
         <!-- Tab: Infants -->
-        <div class="tab-content active" id="tab-infant">
+        <div class="tab-content active" id="tab-infant" role="tabpanel" aria-labelledby="btn-infant">
             <div class="program-detail-grid">
                 <img src="<?php echo esc_url(get_template_directory_uri()); ?>/images/program-infants.jpg" alt="Infant program" class="program-detail-img">
                 <div class="program-detail-content">
@@ -71,7 +71,7 @@ get_header(); ?>
         </div>
 
         <!-- Tab: Pre-Toddlers -->
-        <div class="tab-content" id="tab-pretoddler">
+        <div class="tab-content" id="tab-pretoddler" role="tabpanel" aria-labelledby="btn-pretoddler">
             <div class="program-detail-grid reverse">
                 <div class="program-detail-content">
                     <span class="program-age-badge" style="background:rgba(75,181,196,0.12);color:#389aa8;">12 – 24 months</span>
@@ -109,7 +109,7 @@ get_header(); ?>
         </div>
 
         <!-- Tab: Toddlers -->
-        <div class="tab-content" id="tab-toddlers">
+        <div class="tab-content" id="tab-toddlers" role="tabpanel" aria-labelledby="btn-toddlers">
             <div class="program-detail-grid">
                 <img src="<?php echo esc_url(get_template_directory_uri()); ?>/images/program-toddlers.jpg" alt="Toddler program" class="program-detail-img">
                 <div class="program-detail-content">
@@ -148,7 +148,7 @@ get_header(); ?>
         </div>
 
         <!-- Tab: Pre-K -->
-        <div class="tab-content" id="tab-prek">
+        <div class="tab-content" id="tab-prek" role="tabpanel" aria-labelledby="btn-prek">
             <div class="program-detail-grid reverse">
                 <div class="program-detail-content">
                     <span class="program-age-badge" style="background:rgba(232,138,180,0.15);color:#b05080;">3 – 4 years</span>
@@ -185,7 +185,7 @@ get_header(); ?>
         </div>
 
         <!-- Tab: Private Kindergarten -->
-        <div class="tab-content" id="tab-kinder">
+        <div class="tab-content" id="tab-kinder" role="tabpanel" aria-labelledby="btn-kinder">
             <div class="program-detail-grid">
                 <img src="<?php echo esc_url(get_template_directory_uri()); ?>/images/program-kinder.jpg" alt="Kindergarten program" class="program-detail-img">
                 <div class="program-detail-content">
@@ -418,18 +418,27 @@ get_header(); ?>
 
 <script>
 function activateTab(tabId) {
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => {
+        b.classList.remove('active');
+        b.setAttribute('aria-selected', 'false');
+        b.setAttribute('tabindex', '-1');
+    });
     document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-    const btn = document.querySelector('.tab-btn[data-tab="' + tabId + '"]');
+    const btn     = document.querySelector('.tab-btn[data-tab="' + tabId + '"]');
     const content = document.getElementById('tab-' + tabId);
     if (btn && content) {
         btn.classList.add('active');
+        btn.setAttribute('aria-selected', 'true');
+        btn.setAttribute('tabindex', '0');
         content.classList.add('active');
     }
 }
 
 document.querySelectorAll('.tab-btn').forEach(btn => {
-    btn.addEventListener('click', () => activateTab(btn.dataset.tab));
+    btn.addEventListener('click', () => {
+        history.replaceState(null, '', '#' + btn.dataset.tab);
+        activateTab(btn.dataset.tab);
+    });
 });
 
 // Open correct tab from URL hash (e.g. /programs/#prek)

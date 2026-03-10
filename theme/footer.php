@@ -20,10 +20,19 @@
                     </a>
                 </div>
                 <p>Welcome to Ms. Darlene's Early Learning Center and Childcare. Nestled in Londonderry, NH, we embrace each child's uniqueness, fostering holistic development through personalized care and engaging activities. We believe in cultivating a foundation for lifelong learning in an environment that feels like a second home.</p>
+                <?php
+                $fb_url = get_theme_mod('facebook_url', '');
+                $ig_url = get_theme_mod('instagram_url', '');
+                if ($fb_url || $ig_url) : ?>
                 <div class="social-links">
-                    <a href="#" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <?php if ($fb_url) : ?>
+                        <a href="<?php echo esc_url($fb_url); ?>" class="social-link" aria-label="Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
+                    <?php endif; ?>
+                    <?php if ($ig_url) : ?>
+                        <a href="<?php echo esc_url($ig_url); ?>" class="social-link" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+                    <?php endif; ?>
                 </div>
+                <?php endif; ?>
             </div>
 
             <!-- Quick Links -->

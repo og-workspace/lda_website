@@ -6,28 +6,34 @@ services:
     container_name: lda_db
     restart: unless-stopped
     environment:
-      MYSQL_DATABASE: lda_wordpress
-      MYSQL_USER: lda_user
-      MYSQL_PASSWORD: lda_pass
-      MYSQL_ROOT_PASSWORD: lda_root_pass
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     volumes:
       - db_data:/var/lib/mysql
     networks:
       - lda_network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   wordpress:
-    image: wordpress:latest
+    image: wordpress:6.4
     container_name: lda_wordpress
     restart: unless-stopped
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     ports:
       - "8080:80"
     environment:
       WORDPRESS_DB_HOST: db:3306
-      WORDPRESS_DB_NAME: lda_wordpress
-      WORDPRESS_DB_USER: lda_user
-      WORDPRESS_DB_PASSWORD: lda_pass
+      WORDPRESS_DB_NAME: ${MYSQL_DATABASE}
+      WORDPRESS_DB_USER: ${MYSQL_USER}
+      WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD}
       WORDPRESS_TABLE_PREFIX: lda_
     volumes:
       - wordpress_data:/var/www/html
@@ -46,8 +52,8 @@ services:
       - "8081:80"
     environment:
       PMA_HOST: db
-      PMA_USER: lda_user
-      PMA_PASSWORD: lda_pass
+      PMA_USER: ${MYSQL_USER}
+      PMA_PASSWORD: ${MYSQL_PASSWORD}
     networks:
       - lda_network
 

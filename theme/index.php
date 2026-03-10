@@ -1,7 +1,7 @@
 <?php get_header(); ?>
 
 <!-- LOADING SCREEN (first visit only) -->
-<div id="loading-screen">
+<div id="loading-screen" style="display:none;">
     <canvas id="fw-canvas"></canvas>
     <div class="ls-shapes">
         <div class="ls-shape s1">⭐</div><div class="ls-shape s2">🎈</div>
@@ -110,8 +110,8 @@
     <div class="container">
         <div class="about-inner">
             <div class="about-images">
-                <img class="about-img-main" src="<?php echo esc_url(get_template_directory_uri()); ?>/images/about-main.jpg" alt="Children learning together">
-                <img class="about-img-secondary" src="<?php echo esc_url(get_template_directory_uri()); ?>/images/about-secondary.jpg" alt="Teacher with students">
+                <img class="about-img-main" src="<?php echo esc_url(get_template_directory_uri()); ?>/images/about-main.jpg" alt="Children learning together" loading="lazy" decoding="async">
+                <img class="about-img-secondary" src="<?php echo esc_url(get_template_directory_uri()); ?>/images/about-secondary.jpg" alt="Teacher with students" loading="lazy" decoding="async">
             </div>
             <div class="about-content">
                 <span class="about-tag">About Us</span>
@@ -175,7 +175,7 @@
     <div class="container">
         <div class="why-inner">
             <div class="why-image">
-                <img src="<?php echo esc_url(get_template_directory_uri()); ?>/images/why-us.jpg" alt="Child learning in classroom">
+                <img src="<?php echo esc_url(get_template_directory_uri()); ?>/images/why-us.jpg" alt="Child learning in classroom" loading="lazy" decoding="async">
             </div>
             <div class="why-content">
                 <span class="why-tag">Why Choose Us</span>
@@ -314,22 +314,22 @@
             <div class="carousel-track-wrap">
                 <div class="carousel-track">
                     <div class="carousel-slide">
-                        <img src="<?php echo esc_url(get_template_directory_uri()); ?>/images/gallery-1.jpg" alt="Kids painting">
+                        <img src="<?php echo esc_url(get_template_directory_uri()); ?>/images/gallery-1.jpg" alt="Kids painting" loading="lazy" decoding="async">
                     </div>
                     <div class="carousel-slide">
-                        <img src="<?php echo esc_url(get_template_directory_uri()); ?>/images/gallery-2.jpg" alt="Daycare activities">
+                        <img src="<?php echo esc_url(get_template_directory_uri()); ?>/images/gallery-2.jpg" alt="Daycare activities" loading="lazy" decoding="async">
                     </div>
                     <div class="carousel-slide">
-                        <img src="<?php echo esc_url(get_template_directory_uri()); ?>/images/gallery-3.jpg" alt="Classroom learning">
+                        <img src="<?php echo esc_url(get_template_directory_uri()); ?>/images/gallery-3.jpg" alt="Classroom learning" loading="lazy" decoding="async">
                     </div>
                     <div class="carousel-slide">
-                        <img src="<?php echo esc_url(get_template_directory_uri()); ?>/images/gallery-4.jpg" alt="Group activities">
+                        <img src="<?php echo esc_url(get_template_directory_uri()); ?>/images/gallery-4.jpg" alt="Group activities" loading="lazy" decoding="async">
                     </div>
                     <div class="carousel-slide">
-                        <img src="<?php echo esc_url(get_template_directory_uri()); ?>/images/gallery-5.jpg" alt="Story time">
+                        <img src="<?php echo esc_url(get_template_directory_uri()); ?>/images/gallery-5.jpg" alt="Story time" loading="lazy" decoding="async">
                     </div>
                     <div class="carousel-slide">
-                        <img src="<?php echo esc_url(get_template_directory_uri()); ?>/images/gallery-6.jpg" alt="Building blocks">
+                        <img src="<?php echo esc_url(get_template_directory_uri()); ?>/images/gallery-6.jpg" alt="Building blocks" loading="lazy" decoding="async">
                     </div>
                 </div>
             </div>
@@ -725,6 +725,7 @@
         return;
     }
     sessionStorage.setItem('lda_visited', '1');
+    screen.style.display = '';
 
     // --- Fireworks on loading screen ---
     const canvas = document.getElementById('fw-canvas');

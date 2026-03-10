@@ -20,7 +20,7 @@ get_header(); ?>
 <!-- EMPLOYMENT CONTENT -->
 <section class="section">
     <div class="container">
-        <div style="display:grid;grid-template-columns:1fr 1.5fr;gap:60px;align-items:start;">
+        <div class="employment-grid">
             <div>
                 <h2 style="font-size:1.8rem;margin-bottom:16px;">Interested in Working With Us?</h2>
                 <p>At Ms. Darlene's Early Learning Center and Childcare, we are always looking for passionate, caring, and dedicated people to join our team.</p>

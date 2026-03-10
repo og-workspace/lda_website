@@ -60,8 +60,9 @@ get_header(); ?>
 
                 <!-- Map embed placeholder -->
                 <div style="margin-top:30px;border-radius:16px;overflow:hidden;height:250px;">
+                    <?php $maps_key = getenv('GOOGLE_MAPS_API_KEY'); ?>
                     <iframe
-                        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY&q=10+Kendall+Pond+Rd,+Londonderry+NH+03053"
+                        src="https://www.google.com/maps/embed/v1/place?key=<?php echo esc_attr($maps_key); ?>&q=10+Kendall+Pond+Rd,+Londonderry+NH+03053"
                         width="100%" height="250" style="border:0;" allowfullscreen loading="lazy"
                         title="Ms. Darlene's ELC Location">
                     </iframe>

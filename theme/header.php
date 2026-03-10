@@ -64,6 +64,7 @@
 <script>
 (function() {
     const header = document.querySelector('.site-header');
+    if (!header) return;
     function onScroll() {
         header.classList.toggle('scrolled', window.scrollY > 50);
     }

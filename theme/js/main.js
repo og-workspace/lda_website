@@ -23,6 +23,11 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
 // Counter animation for stats
 function animateCounter(el) {
     const target = parseInt(el.dataset.target, 10);
+    const suffix = el.dataset.suffix || '';
+    if (isNaN(target) || target <= 0) {
+        el.textContent = '0' + suffix;
+        return;
+    }
     const duration = 1500;
     const step = target / (duration / 16);
     let current = 0;
@@ -33,7 +38,7 @@ function animateCounter(el) {
             current = target;
             clearInterval(timer);
         }
-        el.textContent = Math.floor(current) + (el.dataset.suffix || '');
+        el.textContent = Math.floor(current) + suffix;
     }, 16);
 }
 
