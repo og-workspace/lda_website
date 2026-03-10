@@ -5,10 +5,15 @@
 get_header(); ?>
 
 <!-- PAGE HERO -->
-<section style="background: linear-gradient(135deg, #fff9ec 0%, #e8f7f9 100%); padding: 80px 0; text-align: center;">
-    <div class="container">
-        <h1 class="section-title">COME JOIN <span class="text-primary">OUR TEAM!</span></h1>
-        <p class="section-subtitle" style="margin-bottom:0;">Be part of something meaningful — help children grow every day.</p>
+<section class="fun-page-hero">
+    <div class="fun-hero-bubbles">
+        <div class="bubble b1"></div><div class="bubble b2"></div>
+        <div class="bubble b3"></div><div class="bubble b4"></div>
+        <div class="bubble b5"></div><div class="bubble b6"></div>
+    </div>
+    <div class="container" style="position:relative;z-index:1;">
+        <h1 style="font-size:2.8rem;color:var(--dark);margin-bottom:12px;font-family:var(--heading-font);">Come Join <span style="color:var(--primary);">Our Team!</span></h1>
+        <p style="color:var(--text);font-size:1.05rem;max-width:560px;margin:0 auto;">Be part of something meaningful — help children grow every day.</p>
     </div>
 </section>
 

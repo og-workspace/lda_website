@@ -5,10 +5,15 @@
 get_header(); ?>
 
 <!-- PAGE HERO -->
-<section style="background: linear-gradient(135deg, #fff9ec 0%, #e8f7f9 100%); padding: 80px 0; text-align: center;">
-    <div class="container">
-        <h1 class="section-title">Our <span class="text-primary">Programs</span></h1>
-        <p class="section-subtitle" style="margin-bottom:16px;">Five age-tailored programs designed to nurture every child from infancy through kindergarten.</p>
+<section class="fun-page-hero">
+    <div class="fun-hero-bubbles">
+        <div class="bubble b1"></div><div class="bubble b2"></div>
+        <div class="bubble b3"></div><div class="bubble b4"></div>
+        <div class="bubble b5"></div><div class="bubble b6"></div>
+    </div>
+    <div class="container" style="position:relative;z-index:1;">
+        <h1 style="font-size:2.8rem;color:var(--dark);margin-bottom:12px;font-family:var(--heading-font);">Our <span style="color:var(--primary);">Programs</span></h1>
+        <p style="color:var(--text);font-size:1.05rem;max-width:560px;margin:0 auto 20px;">Five age-tailored programs designed to nurture every child from infancy through kindergarten.</p>
         <span style="display:inline-block;background:rgba(245,166,35,0.15);color:#e0911a;padding:6px 20px;border-radius:50px;font-weight:700;font-size:14px;">NOW ENROLLING</span>
     </div>
 </section>
@@ -412,14 +417,27 @@ get_header(); ?>
 </style>
 
 <script>
-document.querySelectorAll('.tab-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+function activateTab(tabId) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+    const btn = document.querySelector('.tab-btn[data-tab="' + tabId + '"]');
+    const content = document.getElementById('tab-' + tabId);
+    if (btn && content) {
         btn.classList.add('active');
-        document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
-    });
+        content.classList.add('active');
+    }
+}
+
+document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => activateTab(btn.dataset.tab));
 });
+
+// Open correct tab from URL hash (e.g. /programs/#prek)
+const hash = window.location.hash.replace('#', '');
+const validTabs = ['infant', 'pretoddler', 'toddlers', 'prek', 'kinder'];
+if (hash && validTabs.includes(hash)) {
+    activateTab(hash);
+}
 </script>
 
 <?php get_footer(); ?>

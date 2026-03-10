@@ -14,7 +14,10 @@
             <!-- Brand -->
             <div class="footer-brand">
                 <div class="footer-logo">
-                    <img src="<?php echo esc_url(get_template_directory_uri()); ?>/images/logo.png" alt="Ms. Darlene's ELC">
+                    <a href="<?php echo esc_url(home_url('/')); ?>" class="site-logo-text">
+                        <span class="logo-line1">Ms. Darlene's</span>
+                        <span class="logo-line2">Early Learning Center &amp; Childcare</span>
+                    </a>
                 </div>
                 <p>Welcome to Ms. Darlene's Early Learning Center and Childcare. Nestled in Londonderry, NH, we embrace each child's uniqueness, fostering holistic development through personalized care and engaging activities. We believe in cultivating a foundation for lifelong learning in an environment that feels like a second home.</p>
                 <div class="social-links">

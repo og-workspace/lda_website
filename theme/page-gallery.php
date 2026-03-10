@@ -1,0 +1,473 @@
+<?php
+/*
+ * Template Name: Photo Gallery Page
+ */
+get_header(); ?>
+
+<!-- GALLERY PAGE -->
+<div class="gallery-page">
+
+    <!-- Animated background shapes -->
+    <div class="bg-shapes">
+        <div class="shape shape-1">⭐</div>
+        <div class="shape shape-2">🎈</div>
+        <div class="shape shape-3">🌟</div>
+        <div class="shape shape-4">✨</div>
+        <div class="shape shape-5">🎨</div>
+        <div class="shape shape-6">🌈</div>
+        <div class="shape shape-7">⭐</div>
+        <div class="shape shape-8">🎈</div>
+        <div class="shape shape-9">✨</div>
+        <div class="shape shape-10">🌟</div>
+        <!-- Geometric blobs -->
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+        <div class="blob blob-4"></div>
+    </div>
+
+    <!-- Hero -->
+    <div class="gallery-hero">
+        <h1>Photo <span>Gallery</span></h1>
+        <p>A peek into the fun, learning, and community that makes Ms. Darlene's so special.</p>
+    </div>
+
+    <!-- Cards -->
+    <div class="container">
+        <div class="pg-grid">
+
+            <div class="pg-item float-1" data-index="0">
+                <div class="pg-img-wrap">
+                    <img src="<?php echo esc_url(get_template_directory_uri()); ?>/images/pg-police.jpg" alt="Londonderry Police Department Visit">
+                    <div class="pg-overlay"><span class="pg-zoom">🔍</span></div>
+                </div>
+                <div class="pg-caption">
+                    <span class="pg-tag">Community</span>
+                    <p>The Londonderry Police Department was kind enough to come out to our school during our summer activities!</p>
+                </div>
+            </div>
+
+            <div class="pg-item float-2" data-index="1">
+                <div class="pg-img-wrap">
+                    <img src="<?php echo esc_url(get_template_directory_uri()); ?>/images/pg-soccer.jpg" alt="Soccer Activities">
+                    <div class="pg-overlay"><span class="pg-zoom">🔍</span></div>
+                </div>
+                <div class="pg-caption">
+                    <span class="pg-tag">Activities</span>
+                    <p>We have many activities throughout the year, like soccer for all ages!</p>
+                </div>
+            </div>
+
+            <div class="pg-item float-3" data-index="2">
+                <div class="pg-img-wrap">
+                    <img src="<?php echo esc_url(get_template_directory_uri()); ?>/images/pg-fire.jpg" alt="Fire Department Visit">
+                    <div class="pg-overlay"><span class="pg-zoom">🔍</span></div>
+                </div>
+                <div class="pg-caption">
+                    <span class="pg-tag">Community</span>
+                    <p>Even the Londonderry Fire Department came out to enjoy the summer activities!</p>
+                </div>
+            </div>
+
+            <div class="pg-item float-1" data-index="3">
+                <div class="pg-img-wrap">
+                    <img src="<?php echo esc_url(get_template_directory_uri()); ?>/images/pg-karate.jpg" alt="Karate with Granite State American Kenpo">
+                    <div class="pg-overlay"><span class="pg-zoom">🔍</span></div>
+                </div>
+                <div class="pg-caption">
+                    <span class="pg-tag">Activities</span>
+                    <p>We love Granite State American Kenpo! They were amazing and the kids had SO much fun!</p>
+                </div>
+            </div>
+
+            <div class="pg-item float-2" data-index="4">
+                <div class="pg-img-wrap">
+                    <img src="<?php echo esc_url(get_template_directory_uri()); ?>/images/pg-homedepot.jpg" alt="Home Depot Building Activity">
+                    <div class="pg-overlay"><span class="pg-zoom">🔍</span></div>
+                </div>
+                <div class="pg-caption">
+                    <span class="pg-tag">Activities</span>
+                    <p>The kids LOVE when Home Depot comes to the school and builds fun toys with them!</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+    <button class="lb-close" aria-label="Close">&times;</button>
+    <button class="lb-prev" aria-label="Previous">&#8592;</button>
+    <button class="lb-next" aria-label="Next">&#8594;</button>
+    <div class="lb-content">
+        <img src="" alt="" id="lb-img">
+        <p id="lb-caption"></p>
+    </div>
+</div>
+
+<style>
+/* =============================================
+   GALLERY PAGE WRAPPER
+   ============================================= */
+.gallery-page {
+    position: relative;
+    background: linear-gradient(160deg, #1a1a4e 0%, #2d1b69 35%, #11998e 100%);
+    min-height: 100vh;
+    overflow: hidden;
+    padding-bottom: 100px;
+}
+
+/* =============================================
+   ANIMATED BACKGROUND SHAPES
+   ============================================= */
+.bg-shapes { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
+
+.shape {
+    position: absolute;
+    font-size: 28px;
+    opacity: 0.18;
+    animation: floatShape linear infinite;
+    user-select: none;
+}
+
+.shape-1  { left: 5%;   top: 10%; animation-duration: 14s; animation-delay: 0s;    font-size: 22px; }
+.shape-2  { left: 15%;  top: 70%; animation-duration: 18s; animation-delay: 2s;    font-size: 30px; }
+.shape-3  { left: 25%;  top: 30%; animation-duration: 12s; animation-delay: 4s;    font-size: 20px; }
+.shape-4  { left: 40%;  top: 80%; animation-duration: 16s; animation-delay: 1s;    font-size: 26px; }
+.shape-5  { left: 55%;  top: 15%; animation-duration: 20s; animation-delay: 3s;    font-size: 32px; }
+.shape-6  { left: 65%;  top: 60%; animation-duration: 15s; animation-delay: 5s;    font-size: 24px; }
+.shape-7  { left: 75%;  top: 40%; animation-duration: 13s; animation-delay: 0.5s;  font-size: 18px; }
+.shape-8  { left: 85%;  top: 85%; animation-duration: 17s; animation-delay: 2.5s;  font-size: 28px; }
+.shape-9  { left: 90%;  top: 20%; animation-duration: 11s; animation-delay: 1.5s;  font-size: 22px; }
+.shape-10 { left: 48%;  top: 50%; animation-duration: 19s; animation-delay: 3.5s;  font-size: 20px; }
+
+@keyframes floatShape {
+    0%   { transform: translateY(0px)   rotate(0deg);   opacity: 0.18; }
+    25%  { transform: translateY(-30px) rotate(10deg);  opacity: 0.25; }
+    50%  { transform: translateY(-15px) rotate(-5deg);  opacity: 0.18; }
+    75%  { transform: translateY(-40px) rotate(8deg);   opacity: 0.22; }
+    100% { transform: translateY(0px)   rotate(0deg);   opacity: 0.18; }
+}
+
+/* Glowing blobs */
+.blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.18;
+    animation: blobPulse ease-in-out infinite alternate;
+}
+
+.blob-1 { width: 400px; height: 400px; background: #f5a623; top: -100px; left: -100px; animation-duration: 8s; }
+.blob-2 { width: 350px; height: 350px; background: #4ab5c4; top: 40%;   right: -80px;  animation-duration: 10s; animation-delay: 2s; }
+.blob-3 { width: 300px; height: 300px; background: #7bc67e; bottom: 0;  left: 30%;     animation-duration: 7s;  animation-delay: 1s; }
+.blob-4 { width: 250px; height: 250px; background: #e88ab4; top: 20%;   left: 45%;     animation-duration: 9s;  animation-delay: 3s; }
+
+@keyframes blobPulse {
+    from { transform: scale(1)    translate(0, 0); }
+    to   { transform: scale(1.15) translate(20px, -20px); }
+}
+
+/* =============================================
+   GALLERY HERO
+   ============================================= */
+.gallery-hero {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 80px 20px 60px;
+}
+
+.gallery-hero h1 {
+    font-family: var(--heading-font);
+    font-size: 3.2rem;
+    color: #fff;
+    margin-bottom: 16px;
+    text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+.gallery-hero h1 span { color: var(--primary); }
+
+.gallery-hero p {
+    color: rgba(255,255,255,0.82);
+    font-size: 1.1rem;
+    max-width: 520px;
+    margin: 0 auto;
+}
+
+/* =============================================
+   PHOTO GRID
+   ============================================= */
+.gallery-page .container { position: relative; z-index: 1; }
+
+.pg-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+}
+
+.pg-item:first-child { grid-column: span 2; }
+
+/* =============================================
+   FLOATING CARD ANIMATIONS
+   ============================================= */
+.pg-item {
+    border-radius: 22px;
+    overflow: hidden;
+    background: rgba(255,255,255,0.10);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.18);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.pg-item.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.float-1 { animation: cardFloat1 6s ease-in-out infinite; }
+.float-2 { animation: cardFloat2 7s ease-in-out infinite; }
+.float-3 { animation: cardFloat3 8s ease-in-out infinite; }
+
+@keyframes cardFloat1 {
+    0%, 100% { transform: translateY(0px); }
+    50%       { transform: translateY(-10px); }
+}
+@keyframes cardFloat2 {
+    0%, 100% { transform: translateY(0px); }
+    50%       { transform: translateY(-14px); }
+}
+@keyframes cardFloat3 {
+    0%, 100% { transform: translateY(0px); }
+    50%       { transform: translateY(-8px); }
+}
+
+.pg-item:hover {
+    box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+    border-color: rgba(245,166,35,0.5);
+}
+
+/* =============================================
+   IMAGE & OVERLAY
+   ============================================= */
+.pg-img-wrap {
+    position: relative;
+    overflow: hidden;
+}
+
+.pg-img-wrap img {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.pg-item:first-child .pg-img-wrap img { height: 320px; }
+
+.pg-item:hover .pg-img-wrap img { transform: scale(1.07); }
+
+.pg-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(245,166,35,0.5), rgba(75,181,196,0.4));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.pg-item:hover .pg-overlay { opacity: 1; }
+
+.pg-zoom {
+    font-size: 40px;
+    filter: drop-shadow(0 3px 8px rgba(0,0,0,0.4));
+    transform: scale(0.7);
+    transition: transform 0.3s ease;
+}
+
+.pg-item:hover .pg-zoom { transform: scale(1); }
+
+/* =============================================
+   CAPTION
+   ============================================= */
+.pg-caption { padding: 18px 20px 22px; }
+
+.pg-tag {
+    display: inline-block;
+    background: rgba(245,166,35,0.25);
+    color: #ffd47a;
+    font-size: 11px;
+    font-weight: 700;
+    font-family: var(--heading-font);
+    padding: 3px 12px;
+    border-radius: 50px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+    border: 1px solid rgba(245,166,35,0.3);
+}
+
+.pg-caption p {
+    font-size: 13.5px;
+    color: rgba(255,255,255,0.85);
+    line-height: 1.65;
+    margin: 0;
+}
+
+/* =============================================
+   LIGHTBOX
+   ============================================= */
+.lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.94);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    animation: fadeIn 0.25s ease;
+}
+
+.lightbox.open { display: flex; }
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+.lb-content { text-align: center; max-width: 820px; width: 100%; }
+
+.lb-content img {
+    max-width: 100%;
+    max-height: 72vh;
+    border-radius: 16px;
+    object-fit: contain;
+    box-shadow: 0 24px 70px rgba(0,0,0,0.6);
+    border: 2px solid rgba(255,255,255,0.1);
+}
+
+.lb-content p {
+    color: rgba(255,255,255,0.85);
+    margin-top: 20px;
+    font-size: 15px;
+    line-height: 1.7;
+    max-width: 600px;
+    margin-inline: auto;
+}
+
+.lb-close {
+    position: fixed;
+    top: 20px; right: 24px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: #fff;
+    font-size: 28px;
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.2s;
+    display: flex; align-items: center; justify-content: center;
+}
+
+.lb-close:hover { background: var(--primary); }
+
+.lb-prev, .lb-next {
+    position: fixed;
+    top: 50%; transform: translateY(-50%);
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: #fff;
+    font-size: 22px;
+    width: 50px; height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+    display: flex; align-items: center; justify-content: center;
+}
+
+.lb-prev { left: 20px; }
+.lb-next { right: 20px; }
+.lb-prev:hover { background: var(--primary); transform: translateY(-50%) scale(1.1); }
+.lb-next:hover { background: var(--primary); transform: translateY(-50%) scale(1.1); }
+
+@media (max-width: 768px) {
+    .pg-grid { grid-template-columns: 1fr 1fr; }
+    .pg-item:first-child { grid-column: span 2; }
+    .gallery-hero h1 { font-size: 2.2rem; }
+    .float-1, .float-2, .float-3 { animation: none; }
+}
+
+@media (max-width: 480px) {
+    .pg-grid { grid-template-columns: 1fr; }
+    .pg-item:first-child { grid-column: span 1; }
+}
+</style>
+
+<script>
+(function() {
+    // Staggered entrance animation
+    const items = document.querySelectorAll('.pg-item');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, i) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => entry.target.classList.add('visible'), i * 120);
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+    items.forEach(item => observer.observe(item));
+
+    // Lightbox
+    const lightbox = document.getElementById('lightbox');
+    const lbImg    = document.getElementById('lb-img');
+    const lbCap    = document.getElementById('lb-caption');
+    let current    = 0;
+
+    const data = Array.from(items).map(item => ({
+        src:     item.querySelector('img').src,
+        alt:     item.querySelector('img').alt,
+        caption: item.querySelector('.pg-caption p').textContent
+    }));
+
+    function openLightbox(index) {
+        current = index;
+        lbImg.src = data[current].src;
+        lbImg.alt = data[current].alt;
+        lbCap.textContent = data[current].caption;
+        lightbox.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+        lightbox.classList.remove('open');
+        document.body.style.overflow = '';
+    }
+
+    function navigate(dir) {
+        current = (current + dir + data.length) % data.length;
+        lbImg.src    = data[current].src;
+        lbImg.alt    = data[current].alt;
+        lbCap.textContent = data[current].caption;
+    }
+
+    items.forEach((item, i) => item.addEventListener('click', () => openLightbox(i)));
+    document.querySelector('.lb-close').addEventListener('click', closeLightbox);
+    document.querySelector('.lb-prev').addEventListener('click',  () => navigate(-1));
+    document.querySelector('.lb-next').addEventListener('click',  () => navigate(1));
+    lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+
+    document.addEventListener('keydown', e => {
+        if (!lightbox.classList.contains('open')) return;
+        if (e.key === 'Escape')     closeLightbox();
+        if (e.key === 'ArrowLeft')  navigate(-1);
+        if (e.key === 'ArrowRight') navigate(1);
+    });
+})();
+</script>
+
+<?php get_footer(); ?>
