@@ -1,0 +1,60 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: lda_db
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: lda_wordpress
+      MYSQL_USER: lda_user
+      MYSQL_PASSWORD: lda_pass
+      MYSQL_ROOT_PASSWORD: lda_root_pass
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - lda_network
+
+  wordpress:
+    image: wordpress:latest
+    container_name: lda_wordpress
+    restart: unless-stopped
+    depends_on:
+      - db
+    ports:
+      - "8080:80"
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_NAME: lda_wordpress
+      WORDPRESS_DB_USER: lda_user
+      WORDPRESS_DB_PASSWORD: lda_pass
+      WORDPRESS_TABLE_PREFIX: lda_
+    volumes:
+      - wordpress_data:/var/www/html
+      - ./theme:/var/www/html/wp-content/themes/lda-theme
+      - ./logo.png:/var/www/html/wp-content/uploads/logo.png
+    networks:
+      - lda_network
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: lda_phpmyadmin
+    restart: unless-stopped
+    depends_on:
+      - db
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOST: db
+      PMA_USER: lda_user
+      PMA_PASSWORD: lda_pass
+    networks:
+      - lda_network
+
+volumes:
+  db_data:
+  wordpress_data:
+
+networks:
+  lda_network:
+    driver: bridge
